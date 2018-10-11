@@ -32,8 +32,31 @@ from evennia.settings_default import *
 ######################################################################
 
 # This is the name of your game. Make it catchy!
-SERVERNAME = "centenniald6"
+SERVERNAME = "Star Wars Centennial"
 
+
+TELNET_ENABLED = True
+TELNET_PORTS = [4010]
+# (proxy, internal). Only proxy should be visible.
+WEBSERVER_ENABLED = True
+WEBSERVER_PORTS = [(4011, 4012)]
+# Telnet+SSL ports, for supporting clients. Visible.
+SSL_ENABLED = False
+SSL_PORTS = [4013]
+# SSH client ports. Requires crypto lib. Visible.
+SSH_ENABLED = False
+SSH_PORTS = [4014]
+# Websocket-client port. Visible.
+WEBSOCKET_CLIENT_ENABLED = True
+WEBSOCKET_CLIENT_PORT = 4015
+# Internal Server-Portal port. Not visible.
+AMP_PORT = 4016
+
+GUEST_ENABLED = True
+GUEST_LIST = ['Guest1', 'Guest2', 'Guest3', 'Guest4', 'Guest5', 'Guest6', 'Guest7', 'Guest8', 'Guest9']
+
+INLINEFUNC_ENABLED = True
+MULTISESSION_MODE = 1
 
 ######################################################################
 # Settings given in secret_settings.py override those in this file.
