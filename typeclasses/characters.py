@@ -31,3 +31,35 @@ class Character(DefaultCharacter):
 
     """
     pass
+
+# Attributes and Skills #######
+# Attributes: Might, Agility, Wit, Charm
+
+# Might Skills: Brawling, Athletics, Melee, Throwing, Swimming, Lift, Climb
+# Agility Skills: Dodge, Stealth, Firearms, Pilot, Quickdraw, Pickpocket, Acrobatics
+# Wit Skills: Medicine, Navigation, Mechanics, Languages, Science, Security, Survival, Perception, Law
+# Charm Skills: Command, Persuasion, Streetwise, Business, Politics, Intimidate, Gambling, Deception, Force
+
+# Perks ########################
+# Racial Perks
+
+# Custom(0)
+# Human(0)
+# Twi'lek(0)
+# Devaronian(0)
+# Arcona(0)
+# Wookie(2) - Claws, +1 to Might skills
+#
+
+
+# Racial Perks
+# Darkvision(1) - Can see in low light situations.  No penalties to Perception checks.
+# Natural Armor(1) - +2 Armor value from Scales, cybernetic enhancements or other means integrated into the physical form.
+# Claws(1) - Unarmed attacks gain +2 to damage. +2 to Climb checks
+# Flight(3) - Character can fly.  Movement is the same as standard (see help Movement).  Ignore rough terrain penalties.  Can fly up to ten feet off the ground.
+# Breath Underwater(2) - Character can breath underwater.  No penalties or Athletics checks to hold breath.
+# Big(1) - Max Might set to 5D, Max Agility set to 3D
+# Small(1) - Max Agility set to 5D, Max Might set to 3D
+
+# General Perks
+# Force Sensitivity(5) - A connection with the Force is possible.  This unlocks the Force Skill.
