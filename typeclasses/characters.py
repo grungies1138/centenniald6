@@ -30,47 +30,20 @@ class Character(DefaultCharacter):
     at_post_puppet - Echoes "AccountName has entered the game" to the room.
 
     """
-    pass
+    def at_object_creation(self):
+        self.db.stats = {'might': {'value': 6, 'brawling': 0, 'athletics': 0, 'melee': 0, 'throwing': 0, 'swimming': 0, 'lift': 0, 'climb': 0},
+                         'agility': {'value': 6, 'dodge': 0, 'stealth': 0, 'firearms': 0, 'pilot': 0, 'quickdraw': 0, 'pickpocket': 0, 'acrobatics': 0},
+                         'wit': {'value': 6, 'medicine': 0, 'navigation': 0, 'mechanics': 0, 'languages': 0, 'science': 0, 'security': 0, 'survival': 0, 'perception': 0, 'law': 0},
+                         'charm': {'value': 6, 'command': 0, 'persuasion': 0, 'streetwise': 0, 'business': 0, 'politics': 0, 'intimidate': 0, 'gambling': 0, 'deception': 0, 'force': 0}}
 
-# Attributes and Skills #######
-# Attributes: Might, Agility, Wit, Charm
-
-# Might Skills: Brawling, Athletics, Melee, Throwing, Swimming, Lift, Climb
-# Agility Skills: Dodge, Stealth, Firearms, Pilot, Quickdraw, Pickpocket, Acrobatics
-# Wit Skills: Medicine, Navigation, Mechanics, Languages, Science, Security, Survival, Perception, Law
-# Charm Skills: Command, Persuasion, Streetwise, Business, Politics, Intimidate, Gambling, Deception, Force
-
-## Perks ########################
-## Racial Perks
-
-# Custom(0)
-# Human(0)
-# Twi'lek(0)
-# Devaronian(0)
-# Arcona(0)
-# Wookie(2) - Claws, Big, +1 to Might skills
-
-## Racial Perks ##
-# Darkvision(1) - Can see in low light situations.  No penalties to Perception checks.
-# Natural Armor(1) - +2 Armor value from Scales, cybernetic enhancements or other means integrated into the physical form.
-# Claws(1) - Unarmed attacks gain +2 to damage. +2 to Climb checks
-# Flight(3) - Character can fly.  Movement is the same as standard (see help Movement).  Ignore rough terrain penalties.  Can fly up to ten feet off the ground.
-# Breath Underwater(2) - Character can breath underwater.  No penalties or Athletics checks to hold breath.
-# Big(1) - Max Might set to 5D, Max Agility set to 3D
-# Small(1) - Max Agility set to 5D, Max Might set to 3D
-
-## General Perks ##
-# Force Sensitivity(5) - A connection with the Force is possible.  This unlocks the Force Skill.
-
-
-## Force Perks ##
-# Force Jump(1) - Force assisted jump that adds height or length to the jump based on need and Force Skill check. (TN 10) +2D to Acrobatics check
-# Force Speed(1) - Force assisted speed.  Can be used to evade (doubles dodge roll for 1 round) (TN 10) +2D to Running check
-# Telepathy(1) - Ability to send(TN 15) and receive(TN 10) telepathic messages. Resist=Wit
-# Telekinesis(1) - Ability to lift 10kg x Force die with only the Force. (TN 15)  To use as a thrown weapon, check Throwing vs dodge, as per normal rules)
-# Force Parry(2) - Ability to use the force to guide your hand when attempting to Parry an incoming attack.  Force Skill is used in lieu of Melee for Parrying
-# Force Grip(3) - Causes target to drop held weapon at their own feet.  Can be picked up on next turn if not otherwise prevented.  Resist=Agility TN=15
-# Force Slam(3) - The Force manipulates air molecules to forms a gust of wind that slams into a target. Resist=Might TN=15 +3D to throwing 2D damage
-# Force Choke(4) - The Force compresses the air molecules around the targets neck to compress their ability to breath.  Resist=Might TN=20 +2D to brawling 3D damage
-# Force Lightning(5) - The Force charges particles in the air forming lightning from the user to the target.  TN=25 +3D to Firearms Resist=Agility 4D Damage
-# Mind Trick(3) - The Force enhances the user's ability to influence others. TN=15 +1D to Charm skills Resist=Wit
+        self.db.armor = 0
+        self.db.body_points = 0
+        self.db.dodge = 0
+        self.db.soak = 0
+        self.db.parry = 0
+        self.db.block = 0
+        self.db.max_might = 4
+        self.db.max_agility = 4
+        self.db.max_wit = 4
+        self.db.max_charm = 4
+        self.db.force_sensitive = False
