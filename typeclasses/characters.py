@@ -37,7 +37,6 @@ class Character(DefaultCharacter):
                          'charm': {'value': 6, 'command': 0, 'persuasion': 0, 'streetwise': 0, 'business': 0, 'politics': 0, 'intimidate': 0, 'gambling': 0, 'deception': 0, 'force': 0}}
 
         self.db.armor = 0
-        self.db.body_points = 0
         self.db.dodge = 0
         self.db.soak = 0
         self.db.parry = 0
@@ -47,3 +46,4 @@ class Character(DefaultCharacter):
         self.db.max_wit = 4
         self.db.max_charm = 4
         self.db.force_sensitive = False
+        self.db.wound_level = 0
