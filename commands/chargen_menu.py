@@ -107,6 +107,8 @@ def ask_personal(caller):
         options += ({"desc": "Background",
                      "goto": "ask_background"},)
 
+    return text, options
+
 
 def ask_fullname(caller):
     text = ""
