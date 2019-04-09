@@ -53,7 +53,7 @@ def at_server_reload_stop():
         print(err)
 
 
-print("git pull completed.")
+    print("git pull completed.")
 
 
 def at_server_cold_start():
