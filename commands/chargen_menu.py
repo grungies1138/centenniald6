@@ -130,7 +130,7 @@ def set_fullname(caller, caller_input, **kwargs):
     inp = caller_input.strip().lower()
     caller.db.fullname = inp
 
-    return ask_fullname
+    return None
 
 
 def reset_chargen(caller):
