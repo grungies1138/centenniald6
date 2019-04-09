@@ -148,7 +148,9 @@ def ask_age(caller):
     text += "Please enter the age you wish to be."
 
     options = ({"key": "_default",
-                "goto": set_age})
+                "goto": set_age},
+               {"desc": "Go Back",
+                "goto": "ask_personal"})
 
     return text, options
 
@@ -160,7 +162,8 @@ def set_age(caller, caller_input, **kwargs):
         age = int(inp)
         caller.db.age = age
         return None
-    except:
+    except TypeError as e:
+        caller.msg("Error: That is not a number.")
         return None
 
 
