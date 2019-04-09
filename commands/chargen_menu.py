@@ -119,14 +119,14 @@ def ask_fullname(caller):
     text += "Please enter your character's full name as you wish it to appear on your Character Sheet."
 
     options = ({"key": "_default",
-                "goto": "_set_fullname"},
+                "goto": set_fullname},
                {"desc": "Go Back",
                 "goto": "ask_personal"})
 
     return text, options
 
 
-def _set_fullname(caller, caller_input, **kwargs):
+def set_fullname(caller, caller_input, **kwargs):
     caller.msg("Set Fullname")
     inp = caller_input.strip().lower()
     caller.db.fullname = inp
