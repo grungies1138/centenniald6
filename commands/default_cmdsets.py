@@ -15,6 +15,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
+from chargen_menu import ChargenMenuCommand
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -30,9 +31,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         Populates the cmdset
         """
         super(CharacterCmdSet, self).at_cmdset_creation()
-        #
-        # any commands you add below will overload the default ones.
-        #
+        self.add(ChargenMenuCommand())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):

@@ -27,7 +27,7 @@ SPECIES = {'human': {'perks': [], 'cost': 0},
            'falleen': {'perks': ['pheromones'], 'cost': 2},
            'mon calamari': {'perks': ['breath underwater'], 'cost': 2},
            'hutt': {'perks': ['big'], 'cost': 4},
-           'ugnaught': {'perks': ['small'], 'cost': 1},
+           'ugnaught': {'perks': ['small'], 'cost': 4},
            'weequay': {'perks': ['natural armor'], 'cost': 2}}
 
 ## Racial Perks ##
@@ -39,6 +39,8 @@ SPECIES = {'human': {'perks': [], 'cost': 0},
 # Big(4) - Max Might set to 5D, Max Agility set to 3D
 # Small(4) - Max Agility set to 5D, Max Might set to 3D
 # Pheromones(2) - +2 to Charm skills
+# Echo Location(3) - User can 'see' objects even in total darkness and can ignore all concealment but they are essentially
+#   colorblind when using this perk.  But Sonic weapons are highly effective and do an additional +2D damage
 
 RACIAL_PERKS = {'darkvision': {'cost': 1, 'bonus': {}, 'description': 'User can see in low or zero light conditions.  '
                     'They suffer no penalties to perception in these circumstances.'},
@@ -55,7 +57,10 @@ RACIAL_PERKS = {'darkvision': {'cost': 1, 'bonus': {}, 'description': 'User can 
                 'small': {'cost': 4, 'bonus': {'max_agility': 5, 'max_might': 3}, 'description': 'Max Agility set to '
                     '5D, Max Might set to 3D'},
                 'pheromones': {'cost': 2, 'bonus': {'charm': '+2'}, 'description': 'You have a natural pheromone that '
-                    'you excrete.  It has a mild intoxicating effect.  You gain a +2 to all charm skills'}}
+                    'you excrete.  It has a mild intoxicating effect.  You gain a +2 to all charm skills'},
+                'echo location': {'cost': 3, 'bonus': {}, 'description': 'User can "see" objects even in total '
+                    'darkness and can ignore all concealment but they are essentially colorblind when using this '
+                    'perk.  But Sonic weapons are highly effective and do an additional +2D damage'}}
 
 
 ## General Perks ##
