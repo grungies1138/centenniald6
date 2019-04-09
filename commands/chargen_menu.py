@@ -127,6 +127,7 @@ def ask_fullname(caller):
 
 
 def set_fullname(caller, caller_input, **kwargs):
+    caller.msg("Set Fullname")
     inp = caller_input.strip().lower()
     caller.db.fullname = inp
 
