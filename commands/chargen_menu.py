@@ -107,14 +107,19 @@ def ask_personal(caller):
         options += ({"desc": "Background",
                      "goto": "ask_background"},)
 
+    options += ({"desc": "Go Back",
+                 "goto": "menu_start_node"},)
+
     return text, options
 
 
 def ask_fullname(caller):
     text = ""
 
-    if caller.db.fullname:
-        text += "Current Full Name: {}".format(titlecase(caller.db.fullname))
+    fullname = caller.db.fullname
+
+    if fullname:
+        text += "Current Full Name: {}\n\n".format(titlecase(fullname))
 
     text += "Please enter your character's full name as you wish it to appear on your Character Sheet."
 
@@ -132,6 +137,31 @@ def set_fullname(caller, caller_input, **kwargs):
     caller.db.fullname = inp
 
     return None
+
+
+def ask_age(caller):
+    text = ""
+    age = caller.db.age
+    if age:
+        text += "Current Age: {}\n\n".format(age)
+
+    text += "Please enter the age you wish to be."
+
+    options = ({"key": "_default",
+                "goto": set_age})
+
+    return text, options
+
+
+def set_age(caller, caller_input, **kwargs):
+    inp = caller_input.strip()
+    age = 0
+    try:
+        age = int(inp)
+        caller.db.age = age
+        return None
+    except:
+        return None
 
 
 def reset_chargen(caller):
