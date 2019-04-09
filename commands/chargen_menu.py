@@ -1,6 +1,6 @@
 from evennia import default_cmds
 from evennia.utils.evmenu import EvMenu
-from commands.library import node_formatter, options_formatter
+from commands.library import node_formatter, options_formatter, titlecase
 
 class ChargenMenuCommand(default_cmds.MuxCommand):
     """
@@ -109,10 +109,26 @@ def ask_personal(caller):
 
 
 def ask_fullname(caller):
-    text = "Please enter your character's full name as you wish it to appear on your Character Sheet."
+    text = ""
+
+    if caller.db.fullname:
+        text += "Current Full Name: {}".format(titlecase(caller.db.fullname))
+
+    text += "Please enter your character's full name as you wish it to appear on your Character Sheet."
 
     options = ({"key": "_default",
-                "goto": "set_fullname"})
+                "goto": "set_fullname"},
+               {"desc": "Go Back",
+                "goto": "ask_personal"})
+
+    return text, options
+
+
+def set_fullname(caller, caller_input, **kwargs):
+    inp = caller_input.strip().lower()
+    caller.db.fullname = inp
+
+    return "ask_fullname"
 
 
 def reset_chargen(caller):

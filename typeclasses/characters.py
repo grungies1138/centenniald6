@@ -47,3 +47,7 @@ class Character(DefaultCharacter):
         self.db.max_charm = 4
         self.db.force_sensitive = False
         self.db.wound_level = 0
+
+
+    def return_appearance(self, looker):
+        return "{}".format(self.db.fullname)

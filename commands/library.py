@@ -1,4 +1,5 @@
 from evennia.utils import evtable
+import re
 
 
 def node_formatter(nodetext, optionstext, caller=None):
@@ -29,3 +30,8 @@ def options_formatter(optionlist, caller=None):
 
     else:
         return "\n".join(options)
+
+def titlecase(s):
+    return re.sub(r"[A-Za-z]+('[A-Za-z]+)?",
+        lambda mo: mo.group(0)[0].upper() +
+            mo.group(0)[1:].lower(), s)
