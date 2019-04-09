@@ -162,7 +162,7 @@ def set_age(caller, caller_input, **kwargs):
         age = int(inp)
         caller.db.age = age
         return None
-    except TypeError as e:
+    except ValueError as e:
         caller.msg("Error: That is not a number.")
         return None
 
