@@ -255,7 +255,7 @@ def confirm_species(caller, caller_input, **kwargs):
     text = ""
     for key, value in species.items():
         text += "Species: {}\n".format(kwargs.get("selected_species"))
-        text += "Description: {}".format(value.get("description"))
+        # text += "Description: {}".format(value.get("description"))
         text += "Perks: {}".format(",".join(value.get("perks")))
 
     options = ({"desc": "Confirm",
