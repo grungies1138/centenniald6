@@ -252,10 +252,12 @@ def ask_species(caller, caller_input, **kwargs):
 
 def _confirm_species(caller, caller_input, **kwargs):
     species = SPECIES.get(kwargs.get("selected_species"))
+    text = ""
     for key, value in species.items():
-        text = "Species: {}\n".format(key)
-        text += "Description: {}".format(value.get("description"))
-        text += "Perks: {}".format(",".join(value.get("perks")))
+        text += "Key: {}\tValue: {}".format(key, value)
+        # text += "Species: {}\n".format(key)
+        # text += "Description: {}".format(value.get("description"))
+        # text += "Perks: {}".format(",".join(value.get("perks")))
 
     options = ({"desc": "Confirm",
                 "goto": (ask_species, {"selected_species": kwargs.get("selected_species")})},
