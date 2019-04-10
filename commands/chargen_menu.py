@@ -241,7 +241,7 @@ def ask_species(caller, caller_input, **kwargs):
     options = ()
 
     for item in SPECIES.keys():
-        node_dict = {"desc": item, "goto": (_confirm_species, {"selected_species": item})}
+        node_dict = {"desc": item, "goto": (confirm_species, {"selected_species": item})}
         options += (node_dict,)
 
     options += ({"desc": "Go Back",
@@ -250,7 +250,7 @@ def ask_species(caller, caller_input, **kwargs):
     return text, options
 
 
-def _confirm_species(caller, caller_input, **kwargs):
+def confirm_species(caller, caller_input, **kwargs):
     species = SPECIES.get(kwargs.get("selected_species"))
     text = ""
     for key, value in species.items():
