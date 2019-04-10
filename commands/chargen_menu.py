@@ -253,7 +253,6 @@ def ask_species(caller, caller_input, **kwargs):
 def confirm_species(caller, caller_input, **kwargs):
     species = SPECIES.get(kwargs.get("selected_species"))
     text = ""
-    text += "{}\n".format(item)
     text += "Species: {}\n".format(kwargs.get("selected_species"))
     text += "Description: {}".format(species.get("description"))
     text += "Perks: {}".format(",".join(species.get("perks")))
