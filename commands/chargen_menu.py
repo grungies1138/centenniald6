@@ -1,6 +1,7 @@
 from evennia import default_cmds
 from evennia.utils.evmenu import EvMenu
 from commands.library import node_formatter, options_formatter, titlecase
+from world.perks import SPECIES
 
 class ChargenMenuCommand(default_cmds.MuxCommand):
     """
@@ -134,7 +135,7 @@ def ask_fullname(caller):
 def set_fullname(caller, caller_input, **kwargs):
     caller.msg("Set Fullname")
     inp = caller_input.strip().lower()
-    caller.db.fullname = inp
+    caller.ndb._menutree.fullname = inp
 
     return None
 
@@ -160,15 +161,113 @@ def set_age(caller, caller_input, **kwargs):
     age = 0
     try:
         age = int(inp)
-        caller.db.age = age
+        caller.ndb._menutree.age = age
         return None
     except ValueError as e:
         caller.msg("Error: That is not a number.")
         return None
 
 
+def ask_height(caller):
+    text = ""
+
+    height = caller.db.height
+
+    if height:
+        text += "Current Height: {}\n\n".format(height)
+
+    text += "Please enter the height you wish to have in meters.  (Ex: 1.8 or 1.2)\n\nDon't know how to convert?  Google it!"
+
+    options = ({"key": "_default",
+                "goto": set_height},
+               {"desc": "Go Back",
+                "goto": "ask_personal"})
+
+    return text, options
+
+
+def set_height(caller, caller_input, **kwargs):
+    inp = caller_input.strip()
+    try:
+        height = int(inp)
+        caller.ndb._menutree.height = height
+        return None
+    except ValueError as e:
+        caller.msg("Error: That is not a number")
+        return None
+
+
+def ask_weight(caller):
+    text = ""
+
+    weight = caller.db.weight
+
+    if weight:
+        text += "Current Height: {}\n\n".format(weight)
+
+    text += "Please enter the weight you wish to have in kilograms.  (Ex: 110 or 83)\n\nDon't know how to convert?  Google it!"
+
+    options = ({"key": "_default",
+                "goto": set_weight},
+               {"desc": "Go Back",
+                "goto": "ask_personal"})
+
+    return text, options
+
+
+def set_weight(caller, caller_input, **kwargs):
+    inp = caller_input.strip()
+    try:
+        weight = int(inp)
+        caller.ndb._menutree.weight = weight
+        return None
+    except ValueError as e:
+        caller.msg("Error: That is not a number")
+        return None
+
+
+def ask_species(caller, caller_input, **kwargs):
+    selected_species = kwargs.get("selected_species")
+
+    if selected_species:
+        caller.db.species = selected_species
+    text = ""
+
+    if selected_species:
+        text += "Currect Species: {}\n\n".format(selected_species)
+
+    text += "Please select the species you would like to review for possible selection."
+
+    options = ()
+
+    for item in SPECIES.keys():
+        node_dict = {"desc": item, "goto": (_confirm_species, {"selected_species": item})}
+        options += (node_dict,)
+
+    options += ({"desc": "Go Back",
+                 "goto": "ask_personal"},)
+
+    return text, options
+
+
+def _confirm_species(caller, caller_input, **kwargs):
+    species = SPECIES.get(kwargs.get("selected_species"))
+    for key, value in species.items():
+        text = "Species: {}\n".format(key)
+        text += "Description: {}".format(value.get("description"))
+        text += "Perks: {}".format(",".join(value.get("perks")))
+
+    options = ({"desc": "Confirm",
+                "goto": (ask_species, {"selected_species": kwargs.get("selected_species")})},
+               {"desc": "Go Back",
+                "goto": "ask_species"})
+
+    return text, options
+
+
 def reset_chargen(caller):
     del caller.db.fullname
+    del caller.db.age
 
 
 def exit_message(caller, menu):

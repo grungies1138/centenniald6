@@ -16,19 +16,19 @@
 # Ugnaught(1) - Small
 # Weequay(2) - Natural Armor
 
-SPECIES = {'human': {'perks': [], 'cost': 0},
-           'twi\'lek': {'perks': [], 'cost': 0},
-           'devaronian': {'perks': [], 'cost': 0},
-           'arcona': {'perks': [], 'cost': 0},
-           'wookiee': {'perks': ['claws', 'big'], 'cost': 5},
-           'toydarian': {'perks': ['flight', 'small'], 'cost': 7},
-           'trandoshan': {'perks': ['claws', 'darkvision', 'natural armor'], 'cost': 5},
-           'gungan': {'perks': ['breath underwater'], 'cost': 2},
-           'falleen': {'perks': ['pheromones'], 'cost': 2},
-           'mon calamari': {'perks': ['breath underwater'], 'cost': 2},
-           'hutt': {'perks': ['big'], 'cost': 4},
-           'ugnaught': {'perks': ['small'], 'cost': 4},
-           'weequay': {'perks': ['natural armor'], 'cost': 2}}
+SPECIES = {'human': {'perks': [], 'cost': 0, 'description': ''},
+           'twi\'lek': {'perks': [], 'cost': 0, 'description': ''},
+           'devaronian': {'perks': [], 'cost': 0, 'description': ''},
+           'arcona': {'perks': [], 'cost': 0, 'description': ''},
+           'wookiee': {'perks': ['claws', 'big'], 'cost': 5, 'description': ''},
+           'toydarian': {'perks': ['flight', 'small'], 'cost': 7, 'description': ''},
+           'trandoshan': {'perks': ['claws', 'darkvision', 'natural armor'], 'cost': 5, 'description': ''},
+           'gungan': {'perks': ['breath underwater'], 'cost': 2, 'description': ''},
+           'falleen': {'perks': ['pheromones'], 'cost': 2, 'description': ''},
+           'mon calamari': {'perks': ['breath underwater'], 'cost': 2, 'description': ''},
+           'hutt': {'perks': ['big'], 'cost': 4, 'description': ''},
+           'ugnaught': {'perks': ['small'], 'cost': 4, 'description': ''},
+           'weequay': {'perks': ['natural armor'], 'cost': 2, 'description': ''}}
 
 ## Racial Perks ##
 # Darkvision(1) - Can see in low light situations.  No penalties to Perception checks.
