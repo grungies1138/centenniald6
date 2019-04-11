@@ -258,7 +258,7 @@ def confirm_species(caller, caller_input, **kwargs):
     options = ()
 
     if "perk" in kwargs.keys():
-        if caller.ndb._menutree.perks:
+        if hasattr(caller.ndb._menutree, 'perks'):
             caller.ndb._menutree.perks.append(kwargs.get("perk"))
         else:
             caller.ndb._menutree.perks = [kwargs.get("perk")]
