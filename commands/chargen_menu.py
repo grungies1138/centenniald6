@@ -1,7 +1,7 @@
 from evennia import default_cmds
 from evennia.utils.evmenu import EvMenu
 from commands.library import node_formatter, options_formatter, titlecase
-from world.perks import SPECIES
+from world.perks import SPECIES, RACIAL_PERKS
 
 class ChargenMenuCommand(default_cmds.MuxCommand):
     """
@@ -244,25 +244,69 @@ def ask_species(caller, caller_input, **kwargs):
         node_dict = {"desc": item, "goto": ("confirm_species", {"selected_species": item})}
         options += (node_dict,)
 
-    options += ({"desc": "Go Back",
+
+    options += ({"desc": "Custom",
+                 "goto": ("confirm_species", {"selected_species": "custom"})},
+                {"desc": "Go Back",
                  "goto": "ask_personal"},)
 
     return text, options
 
 
 def confirm_species(caller, caller_input, **kwargs):
-    species = SPECIES.get(kwargs.get("selected_species"))
     text = ""
-    text += "Species: {}\n".format(kwargs.get("selected_species"))
-    text += "Description: {}".format(species.get("description"))
-    text += "Perks: {}".format(",".join(species.get("perks")))
+    options = ()
 
-    options = ({"desc": "Confirm",
-                "goto": (ask_species, {"selected_species": kwargs.get("selected_species")})},
-               {"desc": "Go Back",
-                "goto": "ask_species"})
+    if "perk" in kwargs.keys():
+        if caller.ndb._menutree.perks:
+            caller.ndb._menutree.perks.append(kwargs.get("perk"))
+        else:
+            caller.ndb._menutree.perks = [kwargs.get("perk")]
+    if kwargs.get("selected_species") == "custom":
+
+        text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
+        text += "Creating a custom species can be fun and rewarding for players.  Often, the built-in species do not " \
+                "quite satisfy the creative desires of the character customization process.  To create a custom " \
+                "species, you simply need to pick one or more (or zero) racial perks.  Each perk has an associated " \
+                "cost as well as description.  To view these details, select one of the options below."
+
+        for item in RACIAL_PERKS.keys():
+            node_dict = {"desc": item, "goto": ("ask_racial_perks", {"perk": item, "selected_species": "custom"})}
+            options += (node_dict,)
+
+        options += ({"desc": "Go Back",
+                     "goto": "ask_species"},)
+    else:
+        species = SPECIES.get(kwargs.get("selected_species"))
+        text += "Species: {}\n".format(titlecase(kwargs.get("selected_species")))
+        text += "Description: {}\n".format(species.get("description"))
+        text += "Perks: {}".format(", ".join(species.get("perks")))
+        text += "Cost: {}".format(species.get("cost"))
+
+        options += ({"desc": "Confirm",
+                    "goto": (ask_species, {"selected_species": kwargs.get("selected_species")})},
+                    {"desc": "Go Back",
+                    "goto": "ask_species"},)
 
     return text, options
+
+
+def ask_racial_perks(caller, caller_input, **kwargs):
+    perk = RACIAL_PERKS.get(kwargs.get("perk"))
+    text = ""
+
+    text += "Perk: {}\n".format(kwargs.get("perk"))
+    text += "Description: {}\n".format(perk.get("description"))
+    text += "Bonus: {}\n".format(perk.get("bonus"))
+    text += "Cost: {}\n\n".format(perk.get("cost"))
+
+    options = ({"desc": "Select",
+                "goto": ("confirm_species", {"selected_perk": kwargs.get("perk"), "selected_species": "custom"})},
+               {"desc": "Go Back",
+                "goto": "confirm_species"})
+
+    return text, options
+
 
 
 def reset_chargen(caller):
