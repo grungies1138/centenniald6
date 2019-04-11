@@ -260,11 +260,10 @@ def confirm_species(caller, caller_input, **kwargs):
     if "perk" in kwargs.keys():
         if hasattr(caller.ndb._menutree, 'perks'):
             caller.ndb._menutree.perks.append(kwargs.get("perk"))
+            text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
         else:
             caller.ndb._menutree.perks = [kwargs.get("perk")]
     if kwargs.get("selected_species") == "custom":
-
-        text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
         text += "Creating a custom species can be fun and rewarding for players.  Often, the built-in species do not " \
                 "quite satisfy the creative desires of the character customization process.  To create a custom " \
                 "species, you simply need to pick one or more (or zero) racial perks.  Each perk has an associated " \
