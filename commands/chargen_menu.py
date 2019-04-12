@@ -277,6 +277,11 @@ def confirm_species(caller, caller_input, **kwargs):
         else:
             caller.ndb._menutree.perks = [kwargs.get("selected_perk")]
             text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
+            perk = RACIAL_PERKS.get(kwargs.get("selected_perk"))
+            cost = perk.get("cost")
+            if caller.ndb._menutree.skill_dice >= cost:
+                caller.ndb._menutree.skill_dice -= cost
+                caller.ndb._menutree.perks.append(kwargs.get("selected_perk"))
     if kwargs.get("selected_species") == "custom":
         text += "Creating a custom species can be fun and rewarding for players.  Often, the built-in species do not " \
                 "quite satisfy the creative desires of the character customization process.  To create a custom " \
