@@ -286,7 +286,7 @@ def confirm_species(caller, caller_input, **kwargs):
                 "character."
 
         for item in RACIAL_PERKS.keys():
-            node_dict = {"desc": item, "goto": ("ask_racial_perks", {"perk": titlecase(item), "selected_species": "custom"})}
+            node_dict = {"desc": titlecase(item), "goto": ("ask_racial_perks", {"perk": item, "selected_species": "custom"})}
             options += (node_dict,)
 
         options += ({"desc": "Go Back",
