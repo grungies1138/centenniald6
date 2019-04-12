@@ -257,7 +257,7 @@ def ask_species(caller, caller_input, **kwargs):
 def confirm_species(caller, caller_input, **kwargs):
     text = ""
     options = ()
-
+    caller.msg("Skill Dice: {}\n\n".format(caller.ndb._menutree.skill_dice))
     dice = caller.ndb._menutree.skill_dice / 3
     pips = caller.ndb._menutree.skill_dice % 3
     text += "Remaining Skill Dice: {}D{}\n\n".format(dice,pips)
