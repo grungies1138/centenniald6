@@ -242,7 +242,7 @@ def ask_species(caller, caller_input, **kwargs):
     options = ()
 
     for item in SPECIES.keys():
-        node_dict = {"desc": item, "goto": ("confirm_species", {"selected_species": item})}
+        node_dict = {"desc": titlecase(item), "goto": ("confirm_species", {"selected_species": item})}
         options += (node_dict,)
 
 
@@ -286,7 +286,7 @@ def confirm_species(caller, caller_input, **kwargs):
                 "character."
 
         for item in RACIAL_PERKS.keys():
-            node_dict = {"desc": titlecase(item), "goto": ("ask_racial_perks", {"perk": item, "selected_species": "custom"})}
+            node_dict = {"desc": item, "goto": ("ask_racial_perks", {"perk": item, "selected_species": "custom"})}
             options += (node_dict,)
 
         options += ({"desc": "Go Back",
