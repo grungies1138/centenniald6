@@ -40,6 +40,7 @@ def menu_start_node(caller):
         Please select an item to modify.  When an item has been set, it will be darkened.  You can still change it 
         (with some exceptions), but it will help you track where you have already been.
     """
+    caller.ndb._menutree.skill_dice = 21
 
     options = ({"desc": "Personals",
                 "goto": "ask_personal"},
@@ -257,13 +258,21 @@ def confirm_species(caller, caller_input, **kwargs):
     text = ""
     options = ()
 
+    dice = caller.ndb._menutree.skill_dice / 3
+    pips = caller.ndb._menutree.skill_dice % 3
+    text += "Remaining Skill Dice: {}D{}\n\n".format(dice,pips)
+
     if "selected_perk" in kwargs.keys():
 
         if hasattr(caller.ndb._menutree, 'perks'):
             if kwargs.get("selected_perk") in caller.ndb._menutree.perks:
                 caller.msg("You cannot select the same perk twice.  Please try again.")
             else:
-                caller.ndb._menutree.perks.append(kwargs.get("selected_perk"))
+                perk = RACIAL_PERKS.get(kwargs.get("selected_perk"))
+                cost = perk.get("cost")
+                if caller.ndb._menutree.skill_dice >= cost:
+                    caller.ndb._menutree.skill_dice -= cost
+                    caller.ndb._menutree.perks.append(kwargs.get("selected_perk"))
             text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
         else:
             caller.ndb._menutree.perks = [kwargs.get("selected_perk")]
@@ -272,10 +281,12 @@ def confirm_species(caller, caller_input, **kwargs):
         text += "Creating a custom species can be fun and rewarding for players.  Often, the built-in species do not " \
                 "quite satisfy the creative desires of the character customization process.  To create a custom " \
                 "species, you simply need to pick one or more (or zero) racial perks.  Each perk has an associated " \
-                "cost as well as description.  To view these details, select one of the options below."
+                "cost as well as description.  To view these details, select one of the options below.\n\nTo remove a " \
+                "perk, select the perk from the list and you will be presented with an option to remove it from your " \
+                "character."
 
         for item in RACIAL_PERKS.keys():
-            node_dict = {"desc": item, "goto": ("ask_racial_perks", {"perk": item, "selected_species": "custom"})}
+            node_dict = {"desc": item, "goto": ("ask_racial_perks", {"perk": titlecase(item), "selected_species": "custom"})}
             options += (node_dict,)
 
         options += ({"desc": "Go Back",
@@ -306,11 +317,23 @@ def ask_racial_perks(caller, caller_input, **kwargs):
 
     options = ({"desc": "Select",
                 "goto": ("confirm_species", {"selected_perk": kwargs.get("perk"), "selected_species": "custom"})},
+               {"desc": "Remove",
+                "goto": (remove_perk, {"selected_perk", kwargs.get("perk")})},
                {"desc": "Go Back",
                 "goto": "confirm_species"})
 
     return text, options
 
+
+def remove_perk(caller, caller_input, **kwargs):
+    perk = kwargs.get("selected_perk")
+
+    if perk in caller.ndb._menutree.perks:
+        caller.ndb._menutree.perks.remove(perk)
+    else:
+        caller.msg("Perk not found.  Please try again.")
+
+    return "confirm_species", {"selected_species": "custom"}
 
 
 def reset_chargen(caller):
