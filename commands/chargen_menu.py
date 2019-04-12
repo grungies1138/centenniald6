@@ -260,8 +260,10 @@ def confirm_species(caller, caller_input, **kwargs):
     if "selected_perk" in kwargs.keys():
 
         if hasattr(caller.ndb._menutree, 'perks'):
-            caller.msg(caller.ndb._menutree.perks)
-            caller.ndb._menutree.perks.append(kwargs.get("selected_perk"))
+            if kwargs.get("selected_perk") in caller.ndb._menutree.perks:
+                caller.msg("You cannot select the same perk twice.  Please try again.")
+            else:
+                caller.ndb._menutree.perks.append(kwargs.get("selected_perk"))
             text += "Currently selected perks: {}\n\n".format(", ".join(caller.ndb._menutree.perks))
         else:
             caller.ndb._menutree.perks = [kwargs.get("selected_perk")]
